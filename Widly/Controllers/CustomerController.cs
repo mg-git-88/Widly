@@ -19,16 +19,35 @@ namespace Widly.Controllers
 
         public ActionResult Customers()
         {
-            var custViewModel = new RandomMovieViewModel();
+            var custViewModel = new RandomMovieViewModel
+            {
+                Customers = GetCustomers()
+            };
             return View(custViewModel);
         }
 
         public ActionResult CustomerDetails(int id)
         {
-            var custViewModel = new RandomMovieViewModel();
-            Customer cust = new Customer();
-            cust.Name = custViewModel.Customers.Find(o => o.Id == id).Name;
+            var cust = new Customer
+            {
+                Name = GetCustomers().Single(o => o.Id == id).Name
+            };
+            if (cust == null)
+            {
+                return HttpNotFound();
+            }
             return View(cust);
+        }
+        private IEnumerable<Customer> GetCustomers()
+        {
+            var customers = new List<Customer> {
+                new Customer {Id=1, Name="Mayukh"},
+                new Customer {Id=2, Name="Manoj"},
+                new Customer {Id=3, Name="Akanksha"},
+                new Customer {Id=4, Name="Hemanth"},
+                new Customer {Id=5, Name="Subhankar"}
+        };
+            return customers;
         }
     }
 }
