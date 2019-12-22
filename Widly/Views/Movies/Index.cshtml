@@ -1,0 +1,20 @@
+﻿@model Widly.ViewModels.RandomMovieViewModel
+@{
+    ViewBag.Title = "Random";
+}
+
+<h2>Movies</h2>
+
+@if (Model.Movies.Count == 0)
+{
+    <p>No one has rented this movie yet!</p>
+}
+else
+{
+    <ul>
+        @foreach (var movie in Model.Movies)
+        {
+            <a href="@Url.Action("MovieDetails", "Movies", new { id = movie.Id })">@movie.Name</a>
+        }
+    </ul>
+}
