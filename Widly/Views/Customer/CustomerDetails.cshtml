@@ -4,4 +4,12 @@
 }
 
 <h2>@Model.Name</h2>
+<ul>
+    <li><span>Membership Type: </span>@Model.MembershipType.Name</li>
+    @if (@Model.DOB != null)
+    {
+        <li><span>Birth Date: </span>@String.Format("{0:d}", Model.DOB)</li>
+    }
+
+</ul>
 

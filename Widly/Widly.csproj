@@ -53,16 +53,31 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -170,27 +185,93 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMappingConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="AutoMapperConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API\CustomersController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
+    <Compile Include="CustomAttributes\AgeRestrictionAttribute.cs" />
+    <Compile Include="DTOs\CustomerDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912231819040_InitialModel.cs" />
+    <Compile Include="Migrations\201912231819040_InitialModel.Designer.cs">
+      <DependentUpon>201912231819040_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912241017545_NewsletterSubscription.cs" />
+    <Compile Include="Migrations\201912241017545_NewsletterSubscription.Designer.cs">
+      <DependentUpon>201912241017545_NewsletterSubscription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912241027179_AddMembershipType.cs" />
+    <Compile Include="Migrations\201912241027179_AddMembershipType.Designer.cs">
+      <DependentUpon>201912241027179_AddMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912241030203_PopulateMembershipTypes.cs" />
+    <Compile Include="Migrations\201912241030203_PopulateMembershipTypes.Designer.cs">
+      <DependentUpon>201912241030203_PopulateMembershipTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912241051257_AddDataAnnotationToCustomerName.cs" />
+    <Compile Include="Migrations\201912241051257_AddDataAnnotationToCustomerName.Designer.cs">
+      <DependentUpon>201912241051257_AddDataAnnotationToCustomerName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251357378_AddMembershipName.cs" />
+    <Compile Include="Migrations\201912251357378_AddMembershipName.Designer.cs">
+      <DependentUpon>201912251357378_AddMembershipName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251401045_ApplyingCharacterLimitOnMembershipTypeName.cs" />
+    <Compile Include="Migrations\201912251401045_ApplyingCharacterLimitOnMembershipTypeName.Designer.cs">
+      <DependentUpon>201912251401045_ApplyingCharacterLimitOnMembershipTypeName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251418143_AddDoBFFieldtoCustomerModel.cs" />
+    <Compile Include="Migrations\201912251418143_AddDoBFFieldtoCustomerModel.Designer.cs">
+      <DependentUpon>201912251418143_AddDoBFFieldtoCustomerModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251422552_PopulateCustomerDoB.cs" />
+    <Compile Include="Migrations\201912251422552_PopulateCustomerDoB.Designer.cs">
+      <DependentUpon>201912251422552_PopulateCustomerDoB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251526193_AddMovieModel.cs" />
+    <Compile Include="Migrations\201912251526193_AddMovieModel.Designer.cs">
+      <DependentUpon>201912251526193_AddMovieModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251659187_AddGenresModelAndAddGenreNavPropertyToMovieModel.cs" />
+    <Compile Include="Migrations\201912251659187_AddGenresModelAndAddGenreNavPropertyToMovieModel.Designer.cs">
+      <DependentUpon>201912251659187_AddGenresModelAndAddGenreNavPropertyToMovieModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251721118_AddMaxLengthToMovieAndGenreName.cs" />
+    <Compile Include="Migrations\201912251721118_AddMaxLengthToMovieAndGenreName.Designer.cs">
+      <DependentUpon>201912251721118_AddMaxLengthToMovieAndGenreName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251726105_SettingMovieAndGenreNameMandatory.cs" />
+    <Compile Include="Migrations\201912251726105_SettingMovieAndGenreNameMandatory.Designer.cs">
+      <DependentUpon>201912251726105_SettingMovieAndGenreNameMandatory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912251727552_PopulateMovies.cs" />
+    <Compile Include="Migrations\201912251727552_PopulateMovies.Designer.cs">
+      <DependentUpon>201912251727552_PopulateMovies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\RandomMovieViewModel.cs" />
+    <Compile Include="ViewModels\CustomerFormViewModel.cs" />
+    <Compile Include="ViewModels\MovieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-lumen.css" />
@@ -258,6 +339,8 @@
     <Content Include="Views\Customer\Customers.cshtml" />
     <Content Include="Views\Customer\CustomerDetails.cshtml" />
     <Content Include="Views\Movies\MovieDetails.cshtml" />
+    <Content Include="Views\Customer\CustomerForm.cshtml" />
+    <Content Include="Views\Movies\MovieForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -285,6 +368,50 @@
     <Analyzer Include="..\packages\Microsoft.NetCore.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetCore.CSharp.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.NetFramework.Analyzers.2.9.8\analyzers\dotnet\cs\Microsoft.NetFramework.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201912231819040_InitialModel.resx">
+      <DependentUpon>201912231819040_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912241017545_NewsletterSubscription.resx">
+      <DependentUpon>201912241017545_NewsletterSubscription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912241027179_AddMembershipType.resx">
+      <DependentUpon>201912241027179_AddMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912241030203_PopulateMembershipTypes.resx">
+      <DependentUpon>201912241030203_PopulateMembershipTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912241051257_AddDataAnnotationToCustomerName.resx">
+      <DependentUpon>201912241051257_AddDataAnnotationToCustomerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251357378_AddMembershipName.resx">
+      <DependentUpon>201912251357378_AddMembershipName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251401045_ApplyingCharacterLimitOnMembershipTypeName.resx">
+      <DependentUpon>201912251401045_ApplyingCharacterLimitOnMembershipTypeName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251418143_AddDoBFFieldtoCustomerModel.resx">
+      <DependentUpon>201912251418143_AddDoBFFieldtoCustomerModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251422552_PopulateCustomerDoB.resx">
+      <DependentUpon>201912251422552_PopulateCustomerDoB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251526193_AddMovieModel.resx">
+      <DependentUpon>201912251526193_AddMovieModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251659187_AddGenresModelAndAddGenreNavPropertyToMovieModel.resx">
+      <DependentUpon>201912251659187_AddGenresModelAndAddGenreNavPropertyToMovieModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251721118_AddMaxLengthToMovieAndGenreName.resx">
+      <DependentUpon>201912251721118_AddMaxLengthToMovieAndGenreName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251726105_SettingMovieAndGenreNameMandatory.resx">
+      <DependentUpon>201912251726105_SettingMovieAndGenreNameMandatory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912251727552_PopulateMovies.resx">
+      <DependentUpon>201912251727552_PopulateMovies.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

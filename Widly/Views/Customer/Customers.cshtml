@@ -1,9 +1,11 @@
-﻿@model Widly.ViewModels.RandomMovieViewModel
+﻿@model Widly.ViewModels.CustomerFormViewModel
 @{
     ViewBag.Title = "Customers";
 }
 
-<h2>Customers</h2>
+<div>
+    @Html.ActionLink("Add New Customer", "CustomerForm", "Customer")
+</div>
 
 @if (Model.Customers.Count() == 0)
 {
@@ -11,11 +13,21 @@
 }
 else
 {
-    <ul>
-        @foreach (var customer in Model.Customers)
-        {
-            <a href="@Url.Action("CustomerDetails", "Customer", new { id = customer.Id })">@customer.Name</a>
-        }
-    </ul>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col"><h3>Customers</h3></th>
+                <th scope="col"><h3>Membership Type</h3></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model.Customers)
+            {
+                <tr class="table-light">
+                    <td><a href="@Url.Action("EditCustomer", "Customer", new { id = customer.Id })">@customer.Name</a></td>
+                    <td>@customer.MembershipType.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-

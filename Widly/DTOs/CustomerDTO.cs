@@ -1,13 +1,17 @@
-﻿using System;
+﻿using AutoMapper;
+using AutoMapper.Configuration.Annotations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Widly.CustomAttributes;
+using Widly.Models;
 
-namespace Widly.Models
+namespace Widly.DTOs
 {
-    public class Customer
+    [AutoMap(typeof(Customer))]
+    public class CustomerDTO
     {
         public int Id { get; set; }
 
@@ -17,13 +21,9 @@ namespace Widly.Models
 
         public bool IsSubscribedToNewsletter { get; set; }
 
-        public MembershipType MembershipType { get; set; }
-
-        [Required(ErrorMessage = "The Membership Type field is required.")]
         public byte MembershipTypeId { get; set; }
 
-        [DataType(DataType.Date)]
-        [AgeRestriction]
+        //[AgeRestriction]
         public DateTime? DOB { get; set; }
     }
 }

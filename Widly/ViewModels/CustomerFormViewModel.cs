@@ -6,9 +6,12 @@ using Widly.Models;
 
 namespace Widly.ViewModels
 {
-    public class RandomMovieViewModel
+    public class CustomerFormViewModel
     {
-        public IEnumerable<Movie> Movies { get; set; }
+        public Customer Customer { get; set; }
+
         public IEnumerable<Customer> Customers { get; set; }
+
+        public IEnumerable<MembershipType> MembershipTypes { get; set; }
     }
 }

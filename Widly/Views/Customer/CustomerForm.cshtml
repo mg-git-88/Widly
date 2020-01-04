@@ -1,0 +1,52 @@
+﻿@model Widly.ViewModels.CustomerFormViewModel
+@{
+    string header, btnName = String.Empty;
+    if (Model.Customer.Id == 0)
+    {
+        ViewBag.Title = "New Customer";
+        header = "Add a Customer";
+        btnName = "Save";
+    }
+    else
+    {
+        ViewBag.Title = "Update Customer";
+        header = "Update a Customer";
+        btnName = "Update";
+    }
+}
+
+<h2>@header</h2>
+
+@using (Html.BeginForm("Save", "Customer", FormMethod.Post))
+{
+    @Html.ValidationSummary(true, "Please correct the following error(s)")
+    <div class="form-group">
+        @Html.LabelFor(o => o.Customer.Name)
+        @Html.TextBoxFor(o => o.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.Customer.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(o => o.Customer.MembershipTypeId, "Membership Type")
+        @Html.DropDownListFor(o => o.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.Customer.MembershipTypeId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(o => o.Customer.DOB, "Date of Birth")
+        @Html.TextBoxFor(o => o.Customer.DOB, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.Customer.DOB)
+    </div>
+
+    <div class="checkbox">
+        @Html.CheckBoxFor(o => o.Customer.IsSubscribedToNewsletter) Subscribe to Newsletter?
+    </div>
+    @Html.HiddenFor(o => o.Customer.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">@btnName</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

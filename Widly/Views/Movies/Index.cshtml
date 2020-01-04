@@ -1,20 +1,31 @@
-﻿@model Widly.ViewModels.RandomMovieViewModel
+﻿@model Widly.ViewModels.MovieViewModel
 @{
     ViewBag.Title = "Random";
 }
 
-<h2>Movies</h2>
-
+<div>
+    @Html.ActionLink("Add New Movie", "MovieForm", "Movies")
+</div>
 @if (Model.Movies.Count() == 0)
 {
     <p>No one has rented this movie yet!</p>
 }
 else
 {
-    <ul>
-        @foreach (var movie in Model.Movies)
-        {
-            <a href="@Url.Action("MovieDetails", "Movies", new { id = movie.Id })">@movie.Name</a>
-        }
-    </ul>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col"><h3>Movies</h3></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model.Movies)
+            {
+
+                <tr class="table-light">
+                    <td><a href="@Url.Action("EditMovie", "Movies", new { id = movie.Id })">@movie.Name</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

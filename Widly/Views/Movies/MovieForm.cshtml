@@ -1,0 +1,53 @@
+﻿@model Widly.ViewModels.MovieViewModel
+@{
+    ViewBag.Title = "New Movie";
+    string header, btnName = String.Empty;
+    if (Model.Movie == null)
+    {
+        header = "New Movie";
+        btnName = "Save";
+    }
+    else
+    {
+        header = "Update Movie";
+        btnName = "Update";
+    }
+}
+
+<h2>@header</h2>
+
+@using (Html.BeginForm("Save", "Movies", FormMethod.Post))
+{
+    @Html.ValidationSummary(true, "Please correct the following error(s)")
+    <div class="form-group">
+        @Html.LabelFor(o => o.Movie.Name)
+        @Html.TextBoxFor(o => o.Movie.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.Movie.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(o => o.Movie.ReleaseDate, "Release Date")
+        @Html.TextBoxFor(o => o.Movie.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.Movie.ReleaseDate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(o => o.Movie.GenreId, "Genre")
+        @Html.DropDownListFor(o => o.Movie.GenreId, new SelectList(Model.Genres, "Id", "Name"), "Select Genre", new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.Movie.GenreId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(o => o.Movie.NumberInStock, "Number in Stock")
+        @Html.TextBoxFor(o => o.Movie.NumberInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.Movie.NumberInStock)
+    </div>
+    @Html.HiddenFor(o => o.Movie.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">@btnName</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

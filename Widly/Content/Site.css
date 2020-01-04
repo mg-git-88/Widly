@@ -40,3 +40,12 @@ textarea {
 .popular {
     color: #ff0000;
 }
+
+.field-validation-error {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.input-validation-error {
+    border: 2px solid #ff0000;
+}
